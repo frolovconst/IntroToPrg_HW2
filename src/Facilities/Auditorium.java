@@ -12,6 +12,7 @@ public class Auditorium {
     private int roomNo;
 
     public Auditorium(StudyTime occupiedTimes, int roomNo) {
+        assert roomNo > 0 : "Room number must be positive";
         this.occupiedTimes = new ArrayList<>();
         this.occupiedTimes.add(occupiedTimes);
         this.roomNo = roomNo;

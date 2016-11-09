@@ -50,7 +50,33 @@ public class University {
     }
 
     public void addInstructor(Instructor instructor){
+        class DataCopy{
+            private ArrayList<Instructor> arrayCopy;
+            DataCopy(){arrayCopy = (ArrayList<Instructor>) instructors.clone();}
+            boolean isConsistent(){return  arrayCopy.equals(instructors)   ;         }
+        }
+        DataCopy copy = null;
+        assert (copy = new DataCopy() )!= null;
+
         this.instructors.add(instructor);
+
+        try{
+            assert AssistantsExist() : "No assistants in the uni";
+        }
+        catch (AssertionError e){
+            e.printStackTrace();
+        }
+
+        assert (copy.isConsistent()) : "Bad assertion, it illustrates, however, the usage of postconditions";
+
+
+
+    }
+
+    private boolean AssistantsExist(){
+        if(assistants.isEmpty())
+            return false;
+        return true;
     }
 
     public Instructor getInstructor(){
@@ -59,6 +85,7 @@ public class University {
 
     public void addLectureCourse(LectureCourse lectureCourse){
         this.courses.add(lectureCourse);
+        assert AssistantsExist() : "No assistants in the uni";
     }
 
     public LectureCourse getLectureCourse(){

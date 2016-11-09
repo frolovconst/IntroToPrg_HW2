@@ -25,6 +25,20 @@ public class Main {
         myUni.getProfessors();
         System.out.println();
         myUni.getStudentByIndex(0).DisplayStudSchedule();
+
+        AssertionsTest(0);
+//        AssertionsTest(1);
+
+    }
+
+    private static void AssertionsTest(int i){
+        try{
+            assert (i!=0) : "falseee";
+        }
+        catch (AssertionError error){
+            error.printStackTrace();
+        }
+        System.out.println("life after asser");
     }
 
     private static void GenerateLectureCourses(University myUni){
@@ -34,11 +48,12 @@ public class Main {
         //monday
         //DSA lecture
         Instructor DSAInstructor = new Instructor(new Name("Alexander", "Klimchik"));
-        myUni.addInstructor(DSAInstructor);
+        try{myUni.addInstructor(DSAInstructor);} catch(AssertionError e){e.printStackTrace();}
         Assistant DSAAssistant = new Assistant(new Name("Igor", "Danilov"));
         myUni.addAssistant(DSAAssistant);
         LectureCourse DSACourse = new CoreCourse("Algorithms and Data Structures", YearOfStudy.MS1, DSAInstructor, DSAAssistant);
-        StudyTime DSASchedule = new StudyTime("Monday", "09", "00");
+        StudyTime DSASchedule = new StudyTime("Monday", 9, 0);
+        try{DSASchedule = new StudyTime("Monday", 0, 0);} catch(AssertionError e){e.printStackTrace();}
         Auditorium aud108 = new Auditorium(DSASchedule, 108);
         Lecture DSALecture = new Lecture(aud108, DSACourse, DSASchedule);
         TeachingDay monday = new TeachingDay(DSALecture);
@@ -46,11 +61,11 @@ public class Main {
         //Wednesday
         //Database lecture
         Instructor DBaseInstructor = new Instructor(new Name("Mohammad", "Kassab"));
-        myUni.addInstructor(DBaseInstructor);
+        try{myUni.addInstructor(DBaseInstructor);} catch(AssertionError e){e.printStackTrace();}
         Assistant DBaseAssistant = new Assistant(new Name("Bulat", "Gabbasov"));
         myUni.addAssistant(DSAAssistant);
         LectureCourse DBaseCourse = new CoreCourse("Data Modelling and Databases", YearOfStudy.MS1, DBaseInstructor, DBaseAssistant);
-        StudyTime DBaseSchedule = new StudyTime("Wednesday", "09", "00");
+        StudyTime DBaseSchedule = new StudyTime("Wednesday", 9, 0);
         Auditorium aud105 = new Auditorium(DBaseSchedule, 105);
         Lecture DBaseLecture = new Lecture(aud105, DBaseCourse, DBaseSchedule);
         TeachingDay wednesday = new TeachingDay(DBaseLecture);
@@ -58,20 +73,20 @@ public class Main {
         //Thursday
         //Programmming lecture
         Instructor ItPInstructor = new Instructor(new Name("Eugene", "Zuev"));
-        myUni.addInstructor(ItPInstructor);
+        try{myUni.addInstructor(ItPInstructor);} catch(AssertionError e){e.printStackTrace();}
         Assistant ItpAssistant = new Assistant(new Name("Leonard", "Johard"));
         myUni.addAssistant(ItpAssistant);
         LectureCourse ItPCourse = new CoreCourse("Intoduction to Programming", YearOfStudy.MS1, ItPInstructor, ItpAssistant);
-        StudyTime ItPSchedule = new StudyTime("Thursday", "09", "00");
+        StudyTime ItPSchedule = new StudyTime("Thursday", 9, 0);
         Lecture ItPLecture = new Lecture(aud105, ItPCourse, ItPSchedule);
         TeachingDay thursday = new TeachingDay(ItPLecture);
 
         //Friday
         //Comp Arch lecture
         Instructor CAAKInstructor = new Instructor(new Name("Alex", "Kostyushko"));
-        myUni.addInstructor(CAAKInstructor);
+        try{myUni.addInstructor(CAAKInstructor);} catch(AssertionError e){e.printStackTrace();}
         LectureCourse CAAKCourse = new ElectiveCourse("Computer Architecture for System Developer", YearOfStudy.MS1, CAAKInstructor);
-        StudyTime CAAKSchedule = new StudyTime("Friday", "10", "00");
+        StudyTime CAAKSchedule = new StudyTime("Friday", 10, 0);
         Auditorium aud308 = new Auditorium(DSASchedule, 308);
         Lecture CAAKLecture = new Lecture(aud308, CAAKCourse, CAAKSchedule);
         TeachingDay friday = new TeachingDay(CAAKLecture);
@@ -100,8 +115,8 @@ public class Main {
                 YearOfStudy.BS2, myUniversity.getInstructor(),
                 myUniversity.getdAssistant());
         myUniversity.addLectureCourse(mewCourse);
-        Auditorium someAud = new Auditorium(new StudyTime("Monday", "09", "00"), 108);
-        Lecture someLect = new Lecture(someAud, mewCourse, new StudyTime("Monday", "09", "00"));
+        Auditorium someAud = new Auditorium(new StudyTime("Monday", 9, 0), 108);
+        Lecture someLect = new Lecture(someAud, mewCourse, new StudyTime("Monday", 9, 0));
         TeachingDay newTeachingDay = new TeachingDay(someLect);
         TeachingWeek firstWeek = new TeachingWeek(newTeachingDay);
         TeachingSchedule testTeachingSchedule = new TeachingSchedule(firstWeek);

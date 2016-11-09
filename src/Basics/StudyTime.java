@@ -5,17 +5,19 @@ package Basics;
  */
 public class StudyTime {
     String dayOfWeek;
-    String hours;
-    String minutes;
+    int hours;
+    int minutes;
 
-    public StudyTime(String dayOfWeek, String hours, String minutes) {
+    public StudyTime(String dayOfWeek, int hours, int minutes) {
+        assert hours >= 9 && hours <=18 : "Non business time";
+        assert minutes >= 0 && minutes <=59 : "Wrong value for minutes";
         this.dayOfWeek = dayOfWeek;
         this.hours = hours;
         this.minutes = minutes;
     }
 
     public String GetSchedule(){
-        return dayOfWeek + " " + hours + ":" + minutes;
+        return dayOfWeek + " " + String.format("%02d", hours) + ":" + String.format("%02d", minutes) ;
     }
 
     public String getDayOfWeek() {
@@ -27,19 +29,19 @@ public class StudyTime {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public String getHours() {
+    public int getHours() {
         return hours;
     }
 
-    public void setHours(String hours) {
+    public void setHours(int hours) {
         this.hours = hours;
     }
 
-    public String getMinutes() {
+    public int getMinutes() {
         return minutes;
     }
 
-    public void setMinutes(String minutes) {
+    public void setMinutes(int minutes) {
         this.minutes = minutes;
     }
 }
